@@ -1,12 +1,12 @@
 # RESTful APIs benchmark with AB tool
 
-1. Express - NodeJS
-1. FastAPI - Python
-1. Fiber - GoLang
+1. [Express - NodeJS](https://github.com/nikhilakki/benchmark-rest-frameworks/tree/main/rest-express-nodejs)
+1. [FastAPI - Python](https://github.com/nikhilakki/benchmark-rest-frameworks/tree/main/rest-fastapi-python)
+1. [Fiber - GoLang](https://github.com/nikhilakki/benchmark-rest-frameworks/tree/main/rest-fiber-golang)
 
 ## Hardware
 
-- Raspberry Pi Model 3
+- [Raspberry Pi 3 Model B v2016](https://en.wikipedia.org/wiki/Raspberry_Pi)
 - Specs -
     - Quad Core 1.2 GHz 64-bit Cortex A53
     - 1GB RAM
@@ -19,10 +19,15 @@
     - Arm Arch - armv7l 
     - Raspberry PI OS
 - Runtime versions
-    - Python 3.8.9
-    - Node v14.17.4
-    - Go v1.16.6
-- Apache Benchmark (AB tool) for the stress test
+    - [Python 3.8.9](https://www.python.org/downloads/%20)
+    - [Node v14.17.4](https://nodejs.org/en/download/)
+    - [Go v1.16.6](https://golang.org/dl/)
+- [Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html) (AB tool) for the stress test
+
+```bash
+ab -k -c 350 -n 5000 http://<rpi ip>:3000/
+# 350 concurrent requests and 5000 total requests
+```
 
 
 ## Benchmarks
