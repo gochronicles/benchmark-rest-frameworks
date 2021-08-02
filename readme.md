@@ -17,7 +17,7 @@
 - Operating system
     - Kernel - 5.10.52-v7+
     - Arm Arch - armv7l 
-    - Raspberry PI OS
+    - [Raspberry PI OS](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit)
 - Runtime versions
     - [Python 3.8.9](https://www.python.org/downloads/%20)
     - [Node v14.17.4](https://nodejs.org/en/download/)
