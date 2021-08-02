@@ -78,3 +78,4 @@ Hope this gave you some perspective. Feel free to share comments and feedback.
 
 Author - [Nikhil Akki](http://nikhilakki.in)
 
+Blog [article Link](gochronicles.com/benchmark-restful-apis/)
