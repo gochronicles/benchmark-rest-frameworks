@@ -13,4 +13,4 @@ async def hello():
 if __name__ == "__main__":
     workers = os.cpu_count()
     print(f"Number of CPUs: {workers}")
-    uvicorn.run(app, host="0.0.0.0", port=3000, workers=workers, log_level="critical")
+    uvicorn.run("app:app", host="0.0.0.0", port=3000, workers=workers, log_level="critical", reload=False)
