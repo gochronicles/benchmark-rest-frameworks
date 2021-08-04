@@ -63,10 +63,16 @@ ab -k -c 350 -n 5000 http://<rpi ip>:3000/
 **CPU util in 500k requests test**
 ![fiber cpu util](public/fiber-bench-500k+.png)
 
+### 4. Async FastAPI Multi-worker 
+![fastapi workers #4](public/fastapi-4-workers-async.png)
+
+### 5. Async ExpressJS Multi-worker 
+
+![express workers #4](public/fastapi-4-workers-async.png)
 
 ## Summary
 
-Clearly Fiber (Golang) is way ahead of the game interms of speed and raw performance. Express (NodeJS) is ~2x faster than Python (FastAPI) and the these frameworks are ~12.5 and ~27.8 times respectively slower than Fiber. 
+Clearly Fiber (Golang) is way ahead of the game interms of speed and raw performance. Express (NodeJS) is ~2x faster than Python (FastAPI) and the these frameworks are ~7.5 and ~11 times respectively slower than Fiber. 
 
 However, this doesn't mean that you no longer use Python or NodeJS based frameworks. Your current software stack along with the dev skills you have in your team will play an important role in making these decisions. 
 
