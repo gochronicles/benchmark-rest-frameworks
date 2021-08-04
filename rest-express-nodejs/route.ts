@@ -1,4 +1,6 @@
 import express from "express";
+
+
 const Router = express.Router();
  
 class Hello {
@@ -13,8 +15,7 @@ class Hello {
     }
   
 }
- 
 
 new Hello();
 
-module.exports = Router;
+export default Router;
