@@ -311,3 +311,7 @@ dist
 
 # custom
 *.js
+
+# pulumi
+Pulumi.*.yaml
+kubeconfig

@@ -1,0 +1,12 @@
+{
+    "name": "benchmark",
+    "devDependencies": {
+        "@types/node": "^10.17.60"
+    },
+    "dependencies": {
+        "@pulumi/digitalocean": "^4.6.0",
+        "@pulumi/docker": "^3.0.0",
+        "@pulumi/kubernetes": "^3.6.3",
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}
