@@ -1,0 +1,42 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2021-08-19T19:34:06.582248514+05:30",
+            "magic": "d7b2b83bf89af5215fdba5586d42a5d5e6d1c1ad1bd5b9b3dd30bb41390d0671",
+            "version": "v3.10.2"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "nikhilakki",
+                "project": "benchmark-rest-frameworks",
+                "stack": "dev"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:dev::benchmark-rest-frameworks::pulumi:pulumi:Stack::benchmark-rest-frameworks-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "expressImageName": "express"
+                }
+            }
+        ],
+        "pending_operations": [
+            {
+                "resource": {
+                    "urn": "urn:pulumi:dev::benchmark-rest-frameworks::pulumi:pulumi:Stack::benchmark-rest-frameworks-dev",
+                    "custom": false,
+                    "type": "pulumi:pulumi:Stack",
+                    "outputs": {
+                        "expressImageName": "express"
+                    }
+                },
+                "type": "deleting"
+            }
+        ]
+    }
+}

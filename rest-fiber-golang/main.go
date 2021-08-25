@@ -4,7 +4,7 @@ import "github.com/gofiber/fiber/v2"
 
 func main() {
 	app := fiber.New(fiber.Config{
-		Prefork:      true,
+		Prefork:      false, // doesn't run on docker even after following steps from https://docs.gofiber.io/api/fiber
 		ServerHeader: "Fiber",
 		AppName:      "Benchmark App",
 	})

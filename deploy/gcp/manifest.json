@@ -1,0 +1,10 @@
+{
+    "deployments": [
+        "rest-fastapi-python",
+        "rest-express-nodejs",
+        "rest-nest-nodejs",
+        "rest-net-http-golang",
+        "rest-fiber-golang",
+        "rest-gin-golang"
+    ]
+}
