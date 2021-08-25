@@ -14,30 +14,8 @@
 1. kubectl
 1. pulumi
 1. nodejs [version > 14] with TypeScript support
-## Run instructions
 
-### Minikube
-
-- Setup minikube
-```bash
-# terminal window 1
-minikube start
-minikube dashboard
-# terminal window 2
-minikube tunnel
-# terminal window 3
-```
-- run pulumi cli
-
-```bash
-pulumi stack init minikube
-pulumi config set gcp:project <project name>
-pulumi config set isMinikube true # required for minikube setup
-pulumi up # build docker image on local and push to GCR, then deploy on minikube cluster
-pulumi destroy # teardown everything (GCR image won't be deleted) 
-```
-
-### GKE
+### Instructions to setup Pulumi for GCP
 
 ```bash
 pulumi stack init gcp-benchmark

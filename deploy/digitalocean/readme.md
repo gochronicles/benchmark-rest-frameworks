@@ -5,10 +5,16 @@
  https://opensource.org/licenses/MIT
 -->
 
-### Digital Ocean
+## Instructions to setup Pulumi for Digital Ocean
 
+```bash
+pulumi stack init dev
 pulumi config set appReplicaCount 1
-pulumi config set dockerUsername nikhilakki
+pulumi config set dockerUsername <username>
 pulumi config set --secret benchmark:dockerPassword <secret-password>
 pulumi config set --secret digitalocean:token <secret-token>
 pulumi config set --secret dockerAccessToken <secret-token>
+pulumi up -y # create / update all resources
+pulumi destory -y # destory all assets
+pulumi stack rm dev # delete stack
+```
