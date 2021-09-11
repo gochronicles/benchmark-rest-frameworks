@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-gin-golang
+spec:
+  selector:
+    matchLabels:
+      app: rest-gin-golang
+  template:
+    metadata:
+      labels:
+        app: rest-gin-golang
+    spec:
+      containers:
+        - name: rest-gin-golang
+          image: ghcr.io/gochronicles/benchmark-rest-frameworks/rest-gin-golang:latest
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-gin-golang
+spec:
+  selector:
+    app: rest-gin-golang
+  ports:
+    - port: 80
+      targetPort: 3000

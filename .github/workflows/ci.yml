@@ -1,0 +1,163 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Publish Docker image
+
+on:
+  push:
+    branches:
+      - terraform-scripts
+  # pull_request:
+  #   branches:
+  #     - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # SERVICE - rest-net-http-golang
+      - name: Docker meta - rest-net-http-golang
+        id: nethttpgo
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-net-http-golang
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-net-http-golang
+          push: true
+          tags: |
+            ${{ steps.nethttpgo.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-net-http-golang:latest
+          labels: ${{ steps.nethttpgo.outputs.labels }}
+
+      # SERVICE - rest-fiber-golang
+      - name: Docker meta - rest-fiber-golang
+        id: fibergo
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-fiber-golang
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-fiber-golang
+          push: true
+          tags: |
+            ${{ steps.fibergo.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-fiber-golang:latest
+          labels: ${{ steps.fibergo.outputs.labels }}
+
+      # SERVICE - rest-gin-golang
+      - name: Docker meta - rest-gin-golang
+        id: gingo
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-gin-golang
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-gin-golang
+          push: true
+          tags: |
+            ${{ steps.gingo.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-gin-golang:latest
+          labels: ${{ steps.gingo.outputs.labels }}
+
+      # SERVICE - rest-nest-nodejs
+      - name: Docker meta - rest-nest-nodejs
+        id: nestjs
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-nest-nodejs
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-nest-nodejs
+          push: true
+          tags: |
+            ${{ steps.nestjs.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-nest-nodejs:latest
+          labels: ${{ steps.nestjs.outputs.labels }}
+
+      # SERVICE - rest-fastapi-python
+      - name: Docker meta - rest-fastapi-python
+        id: fastapi
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-fastapi-python
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-fastapi-python
+          push: true
+          tags: |
+            ${{ steps.fastapi.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-fastapi-python:latest
+          labels: ${{ steps.fastapi.outputs.labels }}
+
+      # SERVICE - rest-express-nodejs
+      - name: Docker meta - rest-express-nodejs
+        id: express
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-express-nodejs
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./rest-express-nodejs
+          push: true
+          tags: |
+            ${{ steps.express.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rest-express-nodejs:latest
+          labels: ${{ steps.express.outputs.labels }}

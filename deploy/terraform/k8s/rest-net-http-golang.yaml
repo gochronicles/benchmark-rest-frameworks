@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-net-http-golang
+spec:
+  selector:
+    matchLabels:
+      app: rest-net-http-golang
+  template:
+    metadata:
+      labels:
+        app: rest-net-http-golang
+    spec:
+      containers:
+        - name: rest-net-http-golang
+          image: ghcr.io/gochronicles/benchmark-rest-frameworks/rest-net-http-golang:latest
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-net-http-golang
+spec:
+  selector:
+    app: rest-net-http-golang
+  ports:
+    - port: 80
+      targetPort: 3000
