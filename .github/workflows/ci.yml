@@ -8,10 +8,10 @@ name: Publish Docker image
 on:
   push:
     branches:
-      - terraform-scripts
-  # pull_request:
-  #   branches:
-  #     - main
+      - main
+  pull_request:
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io
