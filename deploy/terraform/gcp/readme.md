@@ -42,12 +42,27 @@ terraform init \
 gcloud container clusters get-credentials benchmark-cluster --zone $REGION
 ```
 
-Run k8s yaml configs via kubectl cli
+**Run k8s yaml configs via kubectl cli**
 
 ```bash
-cd ../k8s/
+cd ../../k8s/
 kubectl apply -f k8s/ # deploys all services
 ```
 
+**SSH into AB tool Client server**
 
-*These scripts are adapted from [repo](https://github.com/gruntwork-io/terraform-google-gke)*
+```bash
+gcloud compute firewall-rules create allow-ssh-ingress-from-iap \
+  --network=<benchmark-cluster-network-name> \
+  --direction=INGRESS \
+  --action=allow \
+  --rules=tcp:22 \
+  --source-ranges=35.235.240.0/20
+
+gcloud beta compute ssh \
+  --zone "us-central1-a" "benchmark-client" \
+  --tunnel-through-iap
+```
+
+_These scripts are adapted from
+[repo](https://github.com/gruntwork-io/terraform-google-gke)_

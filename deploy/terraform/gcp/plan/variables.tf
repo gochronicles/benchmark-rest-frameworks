@@ -8,10 +8,14 @@ variable "project" {
   type        = string
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
 variable "location" {
   description = "The location (region or zone) of the GKE cluster."
   type        = string
-  default     = "us-central1"
+  default     = "us-central1-a"
 }
 
 variable "region" {
@@ -19,12 +23,6 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
-
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster."
   type        = string

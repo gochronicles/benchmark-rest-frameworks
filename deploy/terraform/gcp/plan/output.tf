@@ -20,3 +20,7 @@ output "cluster_ca_certificate" {
   sensitive   = true
   value       = module.gke_cluster.cluster_ca_certificate
 }
+
+output "vpc_network" {
+  value = module.vpc_network
+}
