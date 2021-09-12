@@ -58,7 +58,7 @@ resource "google_container_node_pool" "node_pool" {
 
   node_config {
     image_type   = "COS"
-    machine_type = "n1-standard-1"
+    machine_type = var.machine_type
 
     labels = {
       all-pools-example = "true"

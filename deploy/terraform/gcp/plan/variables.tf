@@ -105,6 +105,11 @@ variable "enable_workload_identity" {
   type        = bool
 }
 
+variable "machine_type" {
+  description = "Machine type for the nodes in the cluster"
+  default     = "n1-standard-1"
+  type        = string
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # TEST PARAMETERS
 # These parameters are only used during testing and should not be touched.
