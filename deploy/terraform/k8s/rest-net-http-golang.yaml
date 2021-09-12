@@ -14,6 +14,7 @@ spec:
       containers:
         - name: rest-net-http-golang
           image: ghcr.io/gochronicles/benchmark-rest-frameworks/rest-net-http-golang:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "256Mi"
