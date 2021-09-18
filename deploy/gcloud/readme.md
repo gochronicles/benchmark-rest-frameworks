@@ -12,7 +12,7 @@
 export GOOGLE_EMAIL_ACCOUNT=<string> # required; example - myemail@gmail.com
 
 export CLUSTER_NAME=<string> # optional; defaults to "benchmark-cluster"
-export MACHINE_TYPE=<string> # optional; defaults to "e2-medium"
+export MACHINE_TYPE=<string> # optional; defaults to "n1-standard-2"
 export NUM_NODES=<int> # optional; defaults to 1
 export MIN_NODES=<int> # optional; defaults to 0
 export MAX_NODES=<int> # optional; defaults to 5

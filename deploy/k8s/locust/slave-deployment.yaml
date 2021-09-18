@@ -8,7 +8,7 @@ metadata:
     app: locust-worker
   name: locust-worker
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       role: locust-worker
@@ -25,22 +25,25 @@ spec:
         app: locust-worker
     spec:
       containers:
-      - image: locustio/locust
-        imagePullPolicy: Always
-        name: worker
-        args: ["--worker", "--master-host=locust-master"]
-        volumeMounts:
-          - mountPath: /home/locust
-            name: locust-scripts
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - image: locustio/locust
+          imagePullPolicy: Always
+          name: worker
+          args: ["--worker", "--master-host=locust-master"]
+          volumeMounts:
+            - mountPath: /home/locust
+              name: locust-scripts
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: locust-scripts
-        configMap:
-          name: scripts-cm
+        - name: locust-scripts
+          configMap:
+            name: scripts-cm

@@ -13,12 +13,12 @@ from pprint import pprint
 
 CLUSTER_NAME = os.getenv("CLUSTER_NAME", "benchmark-cluster")
 GOOGLE_EMAIL_ACCOUNT = os.getenv("GOOGLE_EMAIL_ACCOUNT")
-MACHINE_TYPE = os.getenv("MACHINE_TYPE", "e2-medium")
+MACHINE_TYPE = os.getenv("MACHINE_TYPE", "n1-standard-2")
 NUM_NODES = os.getenv("NUM_NODES", 1)
 MIN_NODES = os.getenv("MIN_NODES", 0)
 MAX_NODES = os.getenv("MAX_NODES", 5)
 ZONE = os.getenv("ZONE", "us-central1-b")
-
+NODE_PORT = os.getenv("NODE_PORT")
 
 createCluster = f"""
 gcloud container clusters create \
@@ -37,8 +37,14 @@ k8sAdminRole = f"""kubectl create clusterrolebinding cluster-admin-binding \
   --user={GOOGLE_EMAIL_ACCOUNT}
   """
 
+
+allowNodePort = f"""gcloud compute firewall-rules create allow-node-port --allow=tcp:{NODE_PORT} \
+  --description="Allow incoming traffic on TCP port {NODE_PORT}" --direction=INGRESS"""
+
+
 cleanup = f"gcloud container clusters delete {CLUSTER_NAME} --zone={ZONE}"
-cli = dict(createCluster=createCluster, k8sAdminRole=k8sAdminRole, cleanup=cleanup)
+
+cli = dict(createCluster=createCluster, k8sAdminRole=k8sAdminRole, allowNodePort=allowNodePort,cleanup=cleanup)
 
 
 if __name__ == "__main__":
@@ -47,11 +53,11 @@ if __name__ == "__main__":
   if cmd is not None:
     pprint(f"Option = {option}")
     pprint(f"Command preview = {cmd}")
-    answer = input("Do you want to run this? (yes/no)").lower()
+    answer = input("Do you want to run this? (yes/no) ").lower()
     if answer == "yes":
       print("Running the above command!")
       os.system(cmd)
     else:
       print("Exiting without action!")
   else:
-    pprint("Invalid selection - choose from createCluster, k8sAdminRole or cleanup!")
+    pprint("Invalid selection - choose from createCluster, k8sAdminRole, allowNodePort, computeInstance, ssh or cleanup!")

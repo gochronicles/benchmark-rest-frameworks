@@ -25,29 +25,32 @@ spec:
         app: locust-master
     spec:
       containers:
-      - image: locustio/locust
-        imagePullPolicy: Always
-        name: master
-        args: ["--master"]
-        volumeMounts:
-          - mountPath: /home/locust
-            name: locust-scripts
-        ports:
-        - containerPort: 5557
-          name: comm
-        - containerPort: 5558
-          name: comm-plus-1
-        - containerPort: 8089
-          name: web-ui
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - image: locustio/locust
+          imagePullPolicy: Always
+          name: master
+          args: ["--master"]
+          volumeMounts:
+            - mountPath: /home/locust
+              name: locust-scripts
+          ports:
+            - containerPort: 5557
+              name: comm
+            - containerPort: 5558
+              name: comm-plus-1
+            - containerPort: 8089
+              name: web-ui
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "300m"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: locust-scripts
-        configMap:
-          name: scripts-cm
+        - name: locust-scripts
+          configMap:
+            name: scripts-cm
