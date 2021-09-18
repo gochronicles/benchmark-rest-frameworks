@@ -14,15 +14,19 @@ from pprint import pprint
 CLUSTER_NAME = os.getenv("CLUSTER_NAME", "benchmark-cluster")
 GOOGLE_EMAIL_ACCOUNT = os.getenv("GOOGLE_EMAIL_ACCOUNT")
 MACHINE_TYPE = os.getenv("MACHINE_TYPE", "e2-medium")
-NUM_NODES = os.getenv("NUM_NODES", 2)
+NUM_NODES = os.getenv("NUM_NODES", 1)
 MIN_NODES = os.getenv("MIN_NODES", 0)
-MAX_NODES = os.getenv("MAX_NODES", 3)
+MAX_NODES = os.getenv("MAX_NODES", 5)
 ZONE = os.getenv("ZONE", "us-central1-b")
 
-clusterCreate = f"""
+
+createCluster = f"""
 gcloud container clusters create \
   --machine-type {MACHINE_TYPE} \
   --num-nodes {NUM_NODES} \
+  --enable-autoscaling \
+  --min-nodes {MIN_NODES} \
+  --max-nodes {MAX_NODES} \
   --zone {ZONE} \
   --cluster-version latest \
   {CLUSTER_NAME}
@@ -32,18 +36,9 @@ k8sAdminRole = f"""kubectl create clusterrolebinding cluster-admin-binding \
   --clusterrole=cluster-admin \
   --user={GOOGLE_EMAIL_ACCOUNT}
   """
-createUserPool = f"""gcloud beta container node-pools create user-pool \
-  --machine-type {MACHINE_TYPE} \
-  --num-nodes 0 \
-  --enable-autoscaling \
-  --min-nodes {MIN_NODES} \
-  --max-nodes {MAX_NODES} \
-  --node-labels hub.jupyter.org/node-purpose=user \
-  --node-taints hub.jupyter.org_dedicated=user:NoSchedule \
-  --zone {ZONE} \
-  --cluster {CLUSTER_NAME}"""
 
-cli = dict(clusterCreate=clusterCreate, k8sAdminRole=k8sAdminRole, createUserPool=createUserPool)
+cleanup = f"gcloud container clusters delete {CLUSTER_NAME} --zone={ZONE}"
+cli = dict(createCluster=createCluster, k8sAdminRole=k8sAdminRole, cleanup=cleanup)
 
 
 if __name__ == "__main__":
@@ -59,4 +54,4 @@ if __name__ == "__main__":
     else:
       print("Exiting without action!")
   else:
-    pprint("Invalid selection - choose from clusterCreate, k8sAdminRole or createUserPool!")
+    pprint("Invalid selection - choose from createCluster, k8sAdminRole or cleanup!")
