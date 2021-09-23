@@ -14,10 +14,11 @@ spec:
       containers:
         - name: rest-fastapi-python
           image: ghcr.io/gochronicles/benchmark-rest-frameworks/rest-fastapi-python:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "100m"
+              memory: "1Gi"
+              cpu: "500m"
           ports:
             - containerPort: 3000
 ---
@@ -26,6 +27,7 @@ kind: Service
 metadata:
   name: rest-fastapi-python
 spec:
+  type: LoadBalancer
   selector:
     app: rest-fastapi-python
   ports:

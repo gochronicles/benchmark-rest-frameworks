@@ -14,10 +14,11 @@ spec:
       containers:
         - name: rest-gin-golang
           image: ghcr.io/gochronicles/benchmark-rest-frameworks/rest-gin-golang:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "100m"
+              memory: "1Gi"
+              cpu: "500m"
           ports:
             - containerPort: 3000
 ---
@@ -26,6 +27,7 @@ kind: Service
 metadata:
   name: rest-gin-golang
 spec:
+  type: LoadBalancer
   selector:
     app: rest-gin-golang
   ports:
