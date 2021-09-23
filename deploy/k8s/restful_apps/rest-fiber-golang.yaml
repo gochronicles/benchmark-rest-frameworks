@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-fiber-golang
 spec:
+  type: LoadBalancer
   selector:
     app: rest-fiber-golang
   ports:

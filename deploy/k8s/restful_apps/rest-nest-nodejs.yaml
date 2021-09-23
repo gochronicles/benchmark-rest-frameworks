@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-nest-nodejs
 spec:
+  type: LoadBalancer
   selector:
     app: rest-nest-nodejs
   ports:

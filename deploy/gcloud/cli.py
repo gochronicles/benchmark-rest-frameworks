@@ -16,11 +16,13 @@ GOOGLE_EMAIL_ACCOUNT = os.getenv("GOOGLE_EMAIL_ACCOUNT")
 MACHINE_TYPE = os.getenv("MACHINE_TYPE", "n1-standard-2")
 NUM_NODES = os.getenv("NUM_NODES", 1)
 MIN_NODES = os.getenv("MIN_NODES", 0)
-MAX_NODES = os.getenv("MAX_NODES", 5)
+MAX_NODES = os.getenv("MAX_NODES", 3)
 ZONE = os.getenv("ZONE", "us-central1-b")
 NODE_PORT = os.getenv("NODE_PORT")
 VM_NAME = os.getenv("VM_NAME", "benchmark-client")
-
+HEY_URL = os.getenv(
+    "HEY_URL", "https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64"
+)
 
 createCluster = f"""
 gcloud container clusters create \
@@ -47,15 +49,17 @@ createClient = f"""gcloud compute instances create {VM_NAME} \
   --zone {ZONE} \
   --image-project=debian-cloud \
   --image-family=debian-10 \
+  --machine-type={MACHINE_TYPE} \
   --metadata=startup-script='#! /bin/bash
   apt update
-  apt -y install -y apache2-utils'
+  apt -y install -y git apache2-utils
+  curl {HEY_URL} -o /usr/bin/hey'
 """
 
 ssh = f"""gcloud beta compute ssh --zone {ZONE} {VM_NAME}"""
 
 cleanup = f"""gcloud container clusters delete {CLUSTER_NAME} --zone={ZONE}
-gcloud compute instances delete {VM_NAME}
+gcloud compute instances delete {VM_NAME} --zone={ZONE}
 """
 
 cli = dict(

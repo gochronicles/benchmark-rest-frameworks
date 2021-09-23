@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-gin-golang
 spec:
+  type: LoadBalancer
   selector:
     app: rest-gin-golang
   ports:

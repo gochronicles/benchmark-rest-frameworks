@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-express-nodejs
 spec:
+  type: LoadBalancer
   selector:
     app: rest-express-nodejs
   ports:

@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-net-http-golang
 spec:
+  type: LoadBalancer
   selector:
     app: rest-net-http-golang
   ports:

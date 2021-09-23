@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: rest-fastapi-python
 spec:
+  type: LoadBalancer
   selector:
     app: rest-fastapi-python
   ports:
