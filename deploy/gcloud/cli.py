@@ -52,8 +52,9 @@ createClient = f"""gcloud compute instances create {VM_NAME} \
   --machine-type={MACHINE_TYPE} \
   --metadata=startup-script='#! /bin/bash
   apt update
-  apt -y install -y git apache2-utils
-  curl {HEY_URL} -o /usr/bin/hey'
+  apt -y install -y htop git apache2-utils
+  curl {HEY_URL} -o hey
+  chmod +x hey && mv hey /usr/bin/'
 """
 
 ssh = f"""gcloud beta compute ssh --zone {ZONE} {VM_NAME}"""
